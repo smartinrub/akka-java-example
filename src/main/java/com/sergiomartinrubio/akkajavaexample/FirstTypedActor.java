@@ -34,11 +34,13 @@ public class FirstTypedActor extends AbstractBehavior<FirstTypedActor.FooMessage
     @Override
     public Receive<FooMessage> createReceive() {
         return newReceiveBuilder()
-                .onMessage(FooMessage.class, message -> {
-                    System.out.println("Received Foo message: " + message.param);
-                    childTypedActor.tell(new ChildTypedActor.BarMessage("hello from top level actor"));
-                    return this; // a "Behavior" type is expected to be returned
-                })
+                .onMessage(FooMessage.class, this::onMessage)
                 .build();
+    }
+
+    private FirstTypedActor onMessage(FooMessage message) {
+        System.out.println("Received Foo message: " + message.param);
+        childTypedActor.tell(new ChildTypedActor.BarMessage("hello from top level actor"));
+        return this; // a "Behavior" type is expected to be returned
     }
 }

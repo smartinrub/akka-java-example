@@ -25,12 +25,13 @@ public class ChildTypedActor extends AbstractBehavior<ChildTypedActor.BarMessage
     @Override
     public Receive<BarMessage> createReceive() {
         return newReceiveBuilder()
-                .onMessage(BarMessage.class, message -> {
-                    System.out.println(message);
-                    return this;
-                })
+                .onMessage(BarMessage.class, this::onMessage)
                 .build();
     }
 
+    private ChildTypedActor onMessage(BarMessage message) {
+        System.out.println(message);
+        return this;
+    }
 
 }
