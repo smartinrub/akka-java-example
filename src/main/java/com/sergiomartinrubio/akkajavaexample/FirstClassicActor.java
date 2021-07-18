@@ -6,9 +6,9 @@ import akka.actor.Props;
 import java.util.Optional;
 
 // Defining a "Classic" actor
-public class FirstActor extends AbstractActor {
+public class FirstClassicActor extends AbstractActor {
 
-    private FirstActor() {
+    private FirstClassicActor() {
     }
 
     // It's good practice to define messages as inner classes
@@ -20,7 +20,7 @@ public class FirstActor extends AbstractActor {
     }
 
     static Props props() {
-        return Props.create(FirstActor.class, FirstActor::new);
+        return Props.create(FirstClassicActor.class, FirstClassicActor::new);
     }
 
     // Used to set the initial behaviour of the actor
