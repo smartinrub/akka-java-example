@@ -15,9 +15,9 @@ public class ClassicMain {
         ActorRef actorRef = system.actorOf(actor, "my-actor");
 
         System.out.println("Start sending messages...");
-        actorRef.tell(new FirstClassicActor.BarMessage("param"), ActorRef.noSender());
+        actorRef.tell(new FirstClassicActor.BarMessage("message"), ActorRef.noSender());
         actorRef.tell("hello world", ActorRef.noSender());
-        actorRef.tell(new FirstClassicActor.FooMessage("another-param"), ActorRef.noSender());
+        actorRef.tell(new FirstClassicActor.FooMessage("another-message"), ActorRef.noSender());
         actorRef.tell("secret-message", ActorRef.noSender());
         System.out.println("Done!");
         // Kills an actor and no more messages will be processed by the actor

@@ -15,7 +15,7 @@ public class FirstTypedActor extends AbstractBehavior<FirstTypedActor.FooMessage
 
     private final ActorRef<ChildTypedActor.BarMessage> childTypedActor;
 
-    public static record FooMessage(String param) {
+    public static record FooMessage(String message) {
 
     }
 
@@ -34,13 +34,14 @@ public class FirstTypedActor extends AbstractBehavior<FirstTypedActor.FooMessage
     @Override
     public Receive<FooMessage> createReceive() {
         return newReceiveBuilder()
-                .onMessage(FooMessage.class, this::onMessage)
+                .onMessage(FooMessage.class, this::onFooMessage)
                 .build();
     }
 
-    private FirstTypedActor onMessage(FooMessage message) {
-        System.out.println("Received Foo message: " + message.param);
+    private FirstTypedActor onFooMessage(FooMessage message) {
+        System.out.println("Received Foo message: " + message.message);
         childTypedActor.tell(new ChildTypedActor.BarMessage("hello from top level actor"));
         return this; // a "Behavior" type is expected to be returned
     }
+
 }
